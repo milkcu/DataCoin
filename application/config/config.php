@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = '';
+$config['base_url'] = 'http://dc/';
 
 /*
 |--------------------------------------------------------------------------
@@ -487,7 +487,6 @@ $config['time_reference'] = 'local';
 |
 */
 $config['rewrite_short_tags'] = FALSE;
-
 /*
 |--------------------------------------------------------------------------
 | Reverse Proxy IPs
@@ -504,4 +503,5 @@ $config['rewrite_short_tags'] = FALSE;
 | Comma-separated:	'10.0.1.200,192.168.5.0/24'
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
+
 $config['proxy_ips'] = '';
