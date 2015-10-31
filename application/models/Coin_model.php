@@ -6,16 +6,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link: http://www.xint78.com
  */
 class Coin_model extends CI_Model {
-    public function add($data) {
-        $this->db->insert('user', $data);
-        return $this->db->insert_id();
-    }
-    public function get($uid) {
-        $this->db->where('uid', $uid);
-        return $this->db->get('user')->row();
-    }
-    public function set($uid, $data) {
-        $this->db->where('uid', $uid);
-        $this->db->update('user', $data);
+    public function give($mobile, $coinnum) {
+        $dealtime = date("YmdHis", time());
+        $dealno = $dealtime . rand(10000000, 99999999);
+        $a = array();
+        $cmd = "java -cp /Users/xintong/Projects/EclipseWorkspace/CoinKit/CoinKit.jar api.Main "
+                . $mobile . " " . $coinnum . " " . $dealtime . " " . $dealno;
+        exec($cmd, $a, $b);
+        $response = new stdClass();
+        $response->mobile = $mobile;
+        $response->coinnum = $coinnum;
+        $response->dealtime = $dealtime;
+        $response->dealno = $dealno;
+        $response->return = json_decode($a[1]);
+        return $response;
     }
 }

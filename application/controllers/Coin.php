@@ -1,0 +1,51 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+/**
+ * @authour: Xintong Liu
+ * @link: http://www.xint78.com
+ */
+class Coin extends CI_Controller {
+    public function __construct() {
+        parent::__construct();
+        $this->load->model('Coin_model');
+    }
+    public function give() {
+        $this->load->helper('form');
+        if($this->input->post()) {
+            $mobile = $this->input->post('mobile');
+            $coinnum = $this->input->post('coinnum');
+            $response = $this->Coin_model->give($mobile, $coinnum);
+
+            $this->load->model('Log_model');
+            $log = array();
+            $log['gid'] = 9;
+            $log['uid'] = 9;
+            $log['mobile'] = $response->mobile;
+            $log['dealtime'] = $response->dealtime;
+            $log['dealno'] = $response->dealno;
+            $log['coinnum'] = $response->coinnum;
+            $log['description'] = 'give';
+            $log['result'] = $response->return->status;
+            $log['returncode'] = $response->return->code;
+            $lid = $this->Log_model->add($log);
+
+            $data['lid'] = $lid;
+            $data['response'] = $response;
+            if($response->return->code == 0) {
+                $this->load->view('coin/success', $data);
+            } else {
+                $this->load->view('coin/failure', $data);
+            }
+        } else {
+            $this->load->view('coin/give');
+        }
+    }
+    public function test() {
+        $a = array();
+        //exec("ls ~", $a, $b);
+        exec("java -cp /Users/xintong/Projects/EclipseWorkspace/CoinKit/CoinKit.jar api.Main 3 4 5 6", $a, $b);
+        print_r($a);
+        //print_r(date("YmdHis", time()) . rand(10000000, 99999999));
+    }
+}
