@@ -11,7 +11,7 @@ class User extends CI_Controller {
         $this->load->model('User_model');
     }
     public function login() {
-        $this->session->set_userdata('dc_uid', 456);
+        $this->session->set_userdata('dc_uid', 9);
         $this->session->set_userdata('dc_mobile', '18353115149');
         print_r($this->session->userdata());
     }
@@ -26,7 +26,7 @@ class User extends CI_Controller {
             $user['state'] = 'normal';
             $uid = $this->User_model->add($user);
             $this->session->set_userdata('dc_uid', $uid);
-            redirect('user/show');
+            redirect('user/log');
         } else {
             $this->load->view('user/add');
         }
@@ -42,7 +42,7 @@ class User extends CI_Controller {
         if($this->input->post()) {
             $data['mobile'] = $this->input->post('mobile');
             $this->User_model->set($uid, $data);
-            redirect('user/show');
+            redirect('user/set');
         } else {
             $data['user'] = $this->User_model->get($uid);
             $this->load->view('user/set', $data);
@@ -90,5 +90,21 @@ class User extends CI_Controller {
         $lid = $this->Log_model->add($log);
         $data['log'] = $this->Log_model->get($lid);
         $this->load->view('user/give', $data);
+    }
+    public function log() {
+        $this->load->model('Log_model');
+        $uid = $this->session->userdata('dc_uid');
+        $limit = 10;
+        $this->load->library('pagination');
+        $offset = $this->uri->segment(3);
+        $config['uri_segment'] = 3;
+        $config['base_url'] = site_url('user/log');
+        $config['total_rows'] = $this->Log_model->getnum();
+        $config['per_page'] = $limit;
+        $this->pagination->initialize($config);
+
+        $data['loglist'] = $this->Log_model->getlist_user($uid, $limit, $offset);
+        $data['user'] = $this->User_model->get($uid);
+        $this->load->view('user/log', $data);
     }
 }
