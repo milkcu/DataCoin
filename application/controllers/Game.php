@@ -15,8 +15,11 @@ class Game extends CI_Controller {
         if($this->input->post()) {
             $game = array();
             $game['pid'] = $this->input->post('pid');
+            $game['pname'] = $this->input->post('pname');
+            $game['pimg'] = $this->input->post('pimg');
+            $game['pfile'] = $this->input->post('pfile');
             $game['state'] = 'new';
-            $game['coinlimit'] = 0;
+            $game['coinlimit'] = $this->input->post('coinlimit');
             $game['coinnow'] = 0;
             $gid = $this->Game_model->add($game);
             redirect('game/show/' . $gid);
@@ -43,7 +46,7 @@ class Game extends CI_Controller {
         $this->load->view('game/show', $data);
     }
     public function all() {
-        $limit = 10;
+        $limit = 20;
         $this->load->library('pagination');
         $offset = $this->uri->segment(3);
         $config['uri_segment'] = 3;

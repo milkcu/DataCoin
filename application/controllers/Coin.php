@@ -12,33 +12,30 @@ class Coin extends CI_Controller {
     }
     public function give() {
         $this->load->helper('form');
-        if($this->input->post()) {
-            $mobile = $this->input->post('mobile');
-            $coinnum = $this->input->post('coinnum');
-            $response = $this->Coin_model->give($mobile, $coinnum);
+        $gid = $this->uri->segment(3);
+        $mobile = $this->session->userdata('dc_mobile');
+        $coinnum = 1;
+        $response = $this->Coin_model->give($mobile, $coinnum);
 
-            $this->load->model('Log_model');
-            $log = array();
-            $log['gid'] = 9;
-            $log['uid'] = 9;
-            $log['mobile'] = $response->mobile;
-            $log['dealtime'] = $response->dealtime;
-            $log['dealno'] = $response->dealno;
-            $log['coinnum'] = $response->coinnum;
-            $log['description'] = 'give';
-            $log['result'] = $response->return->status;
-            $log['returncode'] = $response->return->code;
-            $lid = $this->Log_model->add($log);
+        $this->load->model('Log_model');
+        $log = array();
+        $log['gid'] = $gid;
+        $log['uid'] = 9;
+        $log['mobile'] = $response->mobile;
+        $log['dealtime'] = $response->dealtime;
+        $log['dealno'] = $response->dealno;
+        $log['coinnum'] = $response->coinnum;
+        $log['description'] = 'give';
+        $log['result'] = $response->return->status;
+        $log['returncode'] = $response->return->code;
+        $lid = $this->Log_model->add($log);
 
-            $data['lid'] = $lid;
-            $data['response'] = $response;
-            if($response->return->code == 0) {
-                $this->load->view('coin/success', $data);
-            } else {
-                $this->load->view('coin/failure', $data);
-            }
+        $data['lid'] = $lid;
+        $data['response'] = $response;
+        if($response->return->code == 0) {
+            $this->load->view('coin/success', $data);
         } else {
-            $this->load->view('coin/give');
+            $this->load->view('coin/failure', $data);
         }
     }
     public function test() {

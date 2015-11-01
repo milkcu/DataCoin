@@ -10,6 +10,11 @@ class User extends CI_Controller {
         parent::__construct();
         $this->load->model('User_model');
     }
+    public function login() {
+        $this->session->set_userdata('dc_uid', 456);
+        $this->session->set_userdata('dc_mobile', '18353115149');
+        print_r($this->session->userdata());
+    }
     public function add() {
         $this->load->helper('form');
         if($this->input->post()) {
