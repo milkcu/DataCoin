@@ -88,4 +88,17 @@ class Game extends CI_Controller {
         $data['gamelist'] = $this->Game_model->getlist($limit, $offset);
         $this->load->view('game/list', $data);
     }
+    public function mall() {
+        $limit = 20;
+        $this->load->library('pagination');
+        $offset = $this->uri->segment(3);
+        $config['uri_segment'] = 3;
+        $config['base_url'] = site_url('game/all');
+        $config['total_rows'] = $this->Game_model->getnum();
+        $config['per_page'] = $limit;
+        $this->pagination->initialize($config);
+
+        $data['gamelist'] = $this->Game_model->getlist($limit, $offset);
+        $this->load->view('game/mlist', $data);
+    }
 }
