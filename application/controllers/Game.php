@@ -13,16 +13,33 @@ class Game extends CI_Controller {
     public function add() {
         $this->load->helper('form');
         if($this->input->post()) {
+            $step = $this->input->post('step');
             $game = array();
-            $game['pid'] = $this->input->post('pid');
-            $game['pname'] = $this->input->post('pname');
-            $game['pimg'] = $this->input->post('pimg');
-            $game['pfile'] = $this->input->post('pfile');
-            $game['state'] = 'new';
-            $game['coinlimit'] = $this->input->post('coinlimit');
-            $game['coinnow'] = 0;
-            $gid = $this->Game_model->add($game);
-            redirect('game/show/' . $gid);
+            if($step == 'collect') {
+                $game['pid'] = $this->input->post('pid');
+                $data['game'] = (object) $game;
+                $this->load->view('game/collect', $data);
+            } elseif($step == 'check') {
+                $game['pid'] = $this->input->post('pid');
+                $game['pname'] = $this->input->post('pname');
+
+                $game['pimg'] = $this->input->post('pimg');
+                $game['pfile'] = $this->input->post('pfile');
+                $data['game'] = (object) $game;
+                $this->load->view('game/check', $data);
+            } elseif($step == 'done') {
+                $game['pid'] = $this->input->post('pid');
+                $game['pname'] = $this->input->post('pname');
+                $game['pimg'] = $this->input->post('pimg');
+                $game['pfile'] = $this->input->post('pfile');
+
+                $game['state'] = 'new';
+                $game['coinlimit'] = $this->input->post('coinlimit');
+                $game['coinnow'] = 0;
+                $gid = $this->Game_model->add($game);
+                redirect('game/set');
+            }
+
         } else {
             $this->load->view('game/add');
         }
@@ -31,12 +48,25 @@ class Game extends CI_Controller {
         $this->load->helper('form');
         if($this->input->post()) {
             $gid = $this->input->post('gid');
-            $data['coinlimit'] = $this->input->post('coinlimit');
-            $this->Game_model->set($gid, $data);
-            redirect('game/show/' . $gid);
+            $game['pid'] = $this->input->post('pid');
+            $game['pname'] = $this->input->post('pname');
+            $game['pimg'] = $this->input->post('pimg');
+            $game['pfile'] = $this->input->post('pfile');
+            $game['coinlimit'] = $this->input->post('coinlimit');
+            $game['coinnow'] = $this->input->post('coinnow');
+            $this->Game_model->setall($gid, $game);
+            redirect('game/set');
         } else {
-            $gid = $this->uri->segment(3);
-            $data['game'] = $this->Game_model->get($gid);
+            $limit = 10;
+            $this->load->library('pagination');
+            $offset = $this->uri->segment(3);
+            $config['uri_segment'] = 3;
+            $config['base_url'] = site_url('game/set');
+            $config['total_rows'] = $this->Game_model->getnum();
+            $config['per_page'] = $limit;
+            $this->pagination->initialize($config);
+
+            $data['gamelist'] = $this->Game_model->getlist($limit, $offset);
             $this->load->view('game/set', $data);
         }
     }

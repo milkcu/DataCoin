@@ -19,7 +19,13 @@ class Log_model extends CI_Model {
     }
     public function getlist($limit = 10, $offset = 0) {
         $this->db->order_by('lid', 'desc');
-        return $this->db->get('log', $limit, $offset)->result();
+        $logs = $this->db->get('log', $limit, $offset)->result();
+        $this->load->model('Game_model');
+        $cnt = count($logs);
+        for($i = 0; $i < $cnt; $i++) {
+            $logs[$i]->game = $this->Game_model->get($logs[$i]->gid);
+        }
+        return $logs;
     }
     public function getnum_user($uid) {
         $this->db->where('uid', $uid);

@@ -52,13 +52,18 @@ class User extends CI_Controller {
         $this->load->helper('form');
         if($this->input->post()) {
             $uid = $this->input->post('uid');
-            $data['state'] = $this->input->post('state');
-            $this->User_model->set($uid, $data);
+            if(isset($_POST['black']) && $this->input->post('black') == 'on') {
+                $data['state'] = 'black';
+                $this->User_model->set($uid, $data);
+            } else {
+                $data['state'] = 'normal';
+                $this->User_model->set($uid, $data);
+            }
             redirect('user/all');
         } else {
-            $uid = $this->uri->segment(3);
-            $data['user'] = $this->User_model->get($uid);
-            $this->load->view('user/state', $data);
+            //$uid = $this->uri->segment(3);
+            //$data['user'] = $this->User_model->get($uid);
+            //$this->load->view('user/state', $data);
         }
     }
     public function all() {

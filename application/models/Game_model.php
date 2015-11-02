@@ -14,6 +14,10 @@ class Game_model extends CI_Model {
         $this->db->where('gid', $gid);
         return $this->db->get('game')->row();
     }
+    public function setall($gid, $data) {
+        $this->db->where('gid', $gid);
+        $this->db->update('game', $data);
+    }
     public function set($gid, $data) {
         $this->db->where('gid', $gid);
         $this->db->update('game', $data);

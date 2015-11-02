@@ -10,7 +10,7 @@
         font-size: 16px;
         margin-top: 60px;
     }
-    .user-input {
+    .user-mobile {
         display: block;
         margin: 40px auto;
         padding: 4px 10px;
@@ -29,10 +29,15 @@
 </style>
 
 <div class="user-set">
-    <form method="post" action="<?= site_url('option/coin') ?>">
-        <label class="user-label">每日每用户赠送限额：</label>
-        <input class="user-input" type="input" name="coinlimit" value="<?= $option->coinlimit ?>">
-        <input class="user-button" type="submit" value="修改">
+    <form method="post" action="<?= site_url('game/add') ?>">
+        <input type="hidden" name="step" value="done">
+        <input type="hidden" name="pid" value="<?= $game->pid ?>">
+        <input type="hidden" name="pname" value="<?= $game->pname ?>">
+        <input type="hidden" name="pimg" value="<?= $game->pimg ?>">
+        <input type="hidden" name="pfile" value="<?= $game->pfile ?>">
+        <label class="user-label">赠送流量币总数：</label>
+        <input class="user-mobile" type="input" name="coinlimit">
+        <input class="user-button" type="submit" value="完成">
     </form>
 </div>
 

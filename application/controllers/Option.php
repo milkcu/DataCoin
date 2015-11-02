@@ -14,12 +14,14 @@ class Option extends CI_Controller {
     public function coin() {
         $this->load->helper('form');
         if($this->input->post()) {
-            $name = 'coin_limit';
+            $name = 'coinlimit';
             $value = $this->input->post($name);
             $this->Option_model->set($name, $value);
             redirect('option/coin');
         } else {
-            $data['option'] = $this->Option_model->get('coin_limit');
+            $option = new stdClass();
+            $option->coinlimit = $this->Option_model->get('coinlimit');
+            $data['option'] = $option;
             $this->load->view('option/coin', $data);
         }
     }
