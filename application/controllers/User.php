@@ -11,6 +11,8 @@ class User extends CI_Controller {
         $this->load->model('User_model');
     }
     public function login() {
+        setcookie('SA8R_2132_auth', 'e7e71m7QvMo0ZXQVHEv7qpGlObXGJAmJrPFJNQzG2t68A3S1XdBtITUWqraq5kFmxow1FTAHHFKcE5vKnJXYQrcg');
+        setcookie('SA8R_2132_saltkey', 'm7Z3T1cV');
         $this->session->set_userdata('dc_uid', 9);
         $this->session->set_userdata('dc_mobile', '18353115149');
         print_r($this->session->userdata());
@@ -111,5 +113,19 @@ class User extends CI_Controller {
         $data['loglist'] = $this->Log_model->getlist_user($uid, $limit, $offset);
         $data['user'] = $this->User_model->get($uid);
         $this->load->view('user/log', $data);
+    }
+    public function test() {
+        print_r($this->User_model->getp());
+        exit();
+        //print_r($_SESSION);
+        $url = 'http://www.1000you.com/bbs/zxf_userinfo.php';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_COOKIE, "SA8R_2132_auth=e7e71m7QvMo0ZXQVHEv7qpGlObXGJAmJrPFJNQzG2t68A3S1XdBtITUWqraq5kFmxow1FTAHHFKcE5vKnJXYQrcg; SA8R_2132_saltkey=m7Z3T1cV");
+        $response = curl_exec($ch);
+        curl_close($ch);
+        print_r($response);
+        print_r(json_decode($response));
     }
 }
