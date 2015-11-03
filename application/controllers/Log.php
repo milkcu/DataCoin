@@ -11,6 +11,10 @@ class Log extends CI_Controller {
         $this->load->model('Log_model');
     }
     public function all() {
+        $this->load->model('Option_model');
+        if(! $this->Option_model->auth()) {
+            redirect(base_url('e/1000you'));
+        }
         $limit = 10;
         $this->load->library('pagination');
         $offset = $this->uri->segment(3);

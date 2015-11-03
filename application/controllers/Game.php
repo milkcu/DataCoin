@@ -11,6 +11,10 @@ class Game extends CI_Controller {
         $this->load->model('Game_model');
     }
     public function add() {
+        $this->load->model('Option_model');
+        if(! $this->Option_model->auth()) {
+            redirect(base_url('e/1000you'));
+        }
         $this->load->helper('form');
         if($this->input->post()) {
             $step = $this->input->post('step');
@@ -45,6 +49,10 @@ class Game extends CI_Controller {
         }
     }
     public function set() {
+        $this->load->model('Option_model');
+        if(! $this->Option_model->auth()) {
+            redirect(base_url('e/1000you'));
+        }
         $this->load->helper('form');
         if($this->input->post()) {
             $gid = $this->input->post('gid');

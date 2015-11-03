@@ -13,6 +13,7 @@ class User extends CI_Controller {
     public function login() {
         setcookie('SA8R_2132_auth', 'e7e71m7QvMo0ZXQVHEv7qpGlObXGJAmJrPFJNQzG2t68A3S1XdBtITUWqraq5kFmxow1FTAHHFKcE5vKnJXYQrcg');
         setcookie('SA8R_2132_saltkey', 'm7Z3T1cV');
+        setcookie('yfmmhecmsdodbdata', 'empirecms');
         $this->session->set_userdata('dc_uid', 9);
         $this->session->set_userdata('dc_mobile', '18353115149');
         print_r($this->session->userdata());
@@ -21,7 +22,8 @@ class User extends CI_Controller {
         $this->load->helper('form');
         if($this->input->post()) {
             $user = array();
-            $user['pid'] = '9';
+            $user['pid'] = $this->User_model->getp()->pid;
+            $user['puname'] = $this->User_model->getp()->puname;
             $user['mobile'] = $this->input->post('mobile');
             $user['sum'] = 0;
             $user['today'] = 0;
@@ -30,6 +32,9 @@ class User extends CI_Controller {
             $this->session->set_userdata('dc_uid', $uid);
             redirect('user/log');
         } else {
+            if(! $this->User_model->getp()) {
+                redirect(base_url());
+            }
             $this->load->view('user/add');
         }
     }
@@ -39,6 +44,9 @@ class User extends CI_Controller {
         $this->load->view('user/show', $data);
     }
     public function set() {
+        if(! $this->User_model->auth()) {
+            redirect(site_url('user/add'));
+        }
         $this->load->helper('form');
         $uid = $this->session->userdata('dc_uid');
         if($this->input->post()) {
@@ -51,6 +59,10 @@ class User extends CI_Controller {
         }
     }
     public function state() {
+        $this->load->model('Option_model');
+        if(! $this->Option_model->auth()) {
+            redirect(base_url('e/1000you'));
+        }
         $this->load->helper('form');
         if($this->input->post()) {
             $uid = $this->input->post('uid');
@@ -69,6 +81,10 @@ class User extends CI_Controller {
         }
     }
     public function all() {
+        $this->load->model('Option_model');
+        if(! $this->Option_model->auth()) {
+            redirect(base_url('e/1000you'));
+        }
         $limit = 10;
         $this->load->library('pagination');
         $offset = $this->uri->segment(3);
@@ -99,6 +115,9 @@ class User extends CI_Controller {
         $this->load->view('user/give', $data);
     }
     public function log() {
+        if(! $this->User_model->auth()) {
+            redirect(site_url('user/add'));
+        }
         $this->load->model('Log_model');
         $uid = $this->session->userdata('dc_uid');
         $limit = 10;

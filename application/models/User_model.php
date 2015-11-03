@@ -52,4 +52,12 @@ class User_model extends CI_Model {
         $this->session->unset_userdata('dc_mobile');
         return false;
     }
+    public function auth() {
+        if(isset($_SESSION['dc_uid']) && isset($_SESSION['dc_mobile'])) {
+            return true;
+        } elseif($this->getp()) {
+            return true;
+        }
+        return false;
+    }
 }

@@ -11,6 +11,10 @@ class Coin extends CI_Controller {
         $this->load->model('Coin_model');
     }
     public function give() {
+        $this->load->model('User_model');
+        if(! $this->User_model->auth()) {
+            redirect(site_url('user/add'));
+        }
         $this->load->helper('form');
         $gid = $this->uri->segment(3);
         $mobile = $this->session->userdata('dc_mobile');
@@ -39,10 +43,11 @@ class Coin extends CI_Controller {
         }
     }
     public function test() {
-        $a = array();
+        echo base_url('e/1000you');
+        //$a = array();
         //exec("ls ~", $a, $b);
-        exec("java -cp /Users/xintong/Projects/EclipseWorkspace/CoinKit/CoinKit.jar api.Main 3 4 5 6", $a, $b);
-        print_r($a);
+        //exec("java -cp /Users/xintong/Projects/EclipseWorkspace/CoinKit/CoinKit.jar api.Main 3 4 5 6", $a, $b);
+        //print_r($a);
         //print_r(date("YmdHis", time()) . rand(10000000, 99999999));
     }
     public function code() {

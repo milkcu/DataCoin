@@ -12,6 +12,9 @@ class Option extends CI_Controller {
         $this->load->model('Option_model');
     }
     public function coin() {
+        if(! $this->Option_model->auth()) {
+            redirect(base_url('e/1000you'));
+        }
         $this->load->helper('form');
         if($this->input->post()) {
             $name = 'coinlimit';
@@ -24,5 +27,11 @@ class Option extends CI_Controller {
             $data['option'] = $option;
             $this->load->view('option/coin', $data);
         }
+    }
+    public function auth() {
+        if(isset($_COOKIE['yfmmhecmsdodbdata'])) {
+            return true;
+        }
+        return false;
     }
 }
