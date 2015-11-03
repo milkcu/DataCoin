@@ -29,6 +29,15 @@ class User_model extends CI_Model {
         $this->db->order_by('uid', 'desc');
         return $this->db->get('user', $limit, $offset)->result();
     }
+    public function isreg($pid) {
+        $this->db->where('pid', $pid);
+        $cnt = $this->db->count_all_results('user');
+        if($cnt != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function getp() {
         if(isset($_COOKIE['SA8R_2132_auth']) && isset($_COOKIE['SA8R_2132_saltkey'])) {
             $auth = $_COOKIE['SA8R_2132_auth'];
@@ -41,22 +50,33 @@ class User_model extends CI_Model {
             $response = curl_exec($ch);
             curl_close($ch);
             $p = json_decode($response);
-            if(isset($p->uid) && $p->uid != 0) {
-                $user = $this->getbyp($p->uid);
-                $this->session->set_userdata('dc_uid', $user->uid);
-                $this->session->set_userdata('dc_mobile', $user->mobile);
-                return $p;
-            }
+            return $p;
         }
         $this->session->unset_userdata('dc_uid');
         $this->session->unset_userdata('dc_mobile');
         return false;
     }
+    public function setp() {
+        $p = $this->getp();
+        if(isset($p->uid) && $p->uid != 0) {
+            $user = $this->getbyp($p->uid);
+            $this->session->set_userdata('dc_uid', $user->uid);
+            $this->session->set_userdata('dc_mobile', $user->mobile);
+            return $p;
+        }
+    }
     public function auth() {
         if(isset($_SESSION['dc_uid']) && isset($_SESSION['dc_mobile'])) {
             return true;
         } elseif($this->getp()) {
-            return true;
+            if($this->isreg($this->getp()->uid)) {
+                // no login
+                $this->setp();
+                return true;
+            } else {
+                // no register
+                return false;
+            }
         }
         return false;
     }

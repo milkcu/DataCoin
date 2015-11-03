@@ -29,7 +29,7 @@ class Log_model extends CI_Model {
     }
     public function getnum_user($uid) {
         $this->db->where('uid', $uid);
-        return $this->db->count_all_result('log');
+        return $this->db->count_all_results('log');
     }
     public function getlist_user($uid, $limit = 10, $offset = 0) {
         $this->db->order_by('lid', 'desc');

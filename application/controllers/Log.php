@@ -29,6 +29,9 @@ class Log extends CI_Controller {
         $data['loglist'] = $this->Log_model->getlist($limit, $offset);
         $this->load->view('log/list', $data);
     }
+    public function test() {
+        print_r($_COOKIE);
+    }
     public function user() {
         //$uid = $this->session->userdata('dc_uid');
         $uid = 9;

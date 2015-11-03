@@ -13,17 +13,17 @@ class User extends CI_Controller {
     public function login() {
         setcookie('SA8R_2132_auth', 'e7e71m7QvMo0ZXQVHEv7qpGlObXGJAmJrPFJNQzG2t68A3S1XdBtITUWqraq5kFmxow1FTAHHFKcE5vKnJXYQrcg');
         setcookie('SA8R_2132_saltkey', 'm7Z3T1cV');
-        setcookie('yfmmhecmsdodbdata', 'empirecms');
-        $this->session->set_userdata('dc_uid', 9);
-        $this->session->set_userdata('dc_mobile', '18353115149');
+        setcookie('yfmmhecmsdodbdata', 'empirecms', time() + 3600, '/');
+        //$this->session->set_userdata('dc_uid', 9);
+        //$this->session->set_userdata('dc_mobile', '18353115149');
         print_r($this->session->userdata());
     }
     public function add() {
         $this->load->helper('form');
         if($this->input->post()) {
             $user = array();
-            $user['pid'] = $this->User_model->getp()->pid;
-            $user['puname'] = $this->User_model->getp()->puname;
+            $user['pid'] = $this->User_model->getp()->uid;
+            $user['puname'] = $this->User_model->getp()->uname;
             $user['mobile'] = $this->input->post('mobile');
             $user['sum'] = 0;
             $user['today'] = 0;
@@ -125,7 +125,7 @@ class User extends CI_Controller {
         $offset = $this->uri->segment(3);
         $config['uri_segment'] = 3;
         $config['base_url'] = site_url('user/log');
-        $config['total_rows'] = $this->Log_model->getnum();
+        $config['total_rows'] = $this->Log_model->getnum_user($uid);
         $config['per_page'] = $limit;
         $this->pagination->initialize($config);
 
@@ -134,13 +134,15 @@ class User extends CI_Controller {
         $this->load->view('user/log', $data);
     }
     public function test() {
-        print_r($this->User_model->getp());
+        print_r($_COOKIE);
+        //print_r($this->User_model->getp());
         exit();
         //print_r($_SESSION);
         $url = 'http://www.1000you.com/bbs/zxf_userinfo.php';
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
         curl_setopt($ch, CURLOPT_COOKIE, "SA8R_2132_auth=e7e71m7QvMo0ZXQVHEv7qpGlObXGJAmJrPFJNQzG2t68A3S1XdBtITUWqraq5kFmxow1FTAHHFKcE5vKnJXYQrcg; SA8R_2132_saltkey=m7Z3T1cV");
         $response = curl_exec($ch);
         curl_close($ch);

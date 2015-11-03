@@ -15,4 +15,11 @@ class Option_model extends CI_Model {
         $this->db->where('name', $name);
         $this->db->update('option');
     }
+    public function auth() {
+        if(isset($_COOKIE['yfmmhecmsdodbdata'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
