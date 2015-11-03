@@ -24,7 +24,7 @@ class Coin extends CI_Controller {
         $this->load->model('Log_model');
         $log = array();
         $log['gid'] = $gid;
-        $log['uid'] = 9;
+        $log['uid'] = $this->session->userdata('dc_uid');
         $log['mobile'] = $response->mobile;
         $log['dealtime'] = $response->dealtime;
         $log['dealno'] = $response->dealno;
@@ -33,6 +33,12 @@ class Coin extends CI_Controller {
         $log['result'] = $response->return->status;
         $log['returncode'] = $response->return->code;
         $lid = $this->Log_model->add($log);
+
+        // game.coinnow - 1
+
+        //
+
+        redirect(site_url('user/log'));
 
         $data['lid'] = $lid;
         $data['response'] = $response;

@@ -39,7 +39,7 @@ class Game extends CI_Controller {
 
                 $game['state'] = 'new';
                 $game['coinlimit'] = $this->input->post('coinlimit');
-                $game['coinnow'] = 0;
+                $game['coinnow'] = $game['coinlimit'];
                 $gid = $this->Game_model->add($game);
                 redirect('game/set');
             }

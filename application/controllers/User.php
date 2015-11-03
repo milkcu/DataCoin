@@ -101,8 +101,8 @@ class User extends CI_Controller {
         // call the java program to send coins
         $this->load->model('Log_model');
         $log = array();
-        $log['gid'] = 9;
-        $log['uid'] = 9;
+        $log['gid'] = $this->uri->segment(3);
+        $log['uid'] = $this->session->userdata('uid');
         $log['mobile'] = '18353115149';
         $log['dealtime'] = '8888';
         $log['dealno'] = '9999';

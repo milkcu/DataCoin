@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: Oct 30, 2015 at 11:22 PM
+-- Generation Time: Nov 03, 2015 at 07:25 PM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -23,125 +23,59 @@ SET time_zone = "+00:00";
 CREATE TABLE `dc_game` (
   `gid` int(11) NOT NULL,
   `pid` int(11) NOT NULL,
+  `pname` text NOT NULL,
+  `pimg` text NOT NULL,
+  `pfile` text NOT NULL,
   `state` varchar(30) NOT NULL,
   `coinlimit` int(11) NOT NULL DEFAULT '0',
   `coinnow` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `dc_game`
 --
 
-INSERT INTO `dc_game` (`gid`, `pid`, `state`, `coinlimit`, `coinnow`) VALUES
-(1, 5, 'new', 0, 0),
-(2, 8, 'new', 0, 0),
-(3, 8, 'new', 0, 0),
-(4, 8, 'new', 0, 0),
-(5, 8, 'new', 0, 0),
-(6, 8, 'new', 0, 0),
-(7, 8, 'new', 0, 0),
-(8, 8, 'new', 0, 0),
-(9, 8, 'new', 888, 0),
-(10, 8, 'new', 0, 0),
-(11, 8, 'new', 0, 0),
-(12, 8, 'new', 0, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `dc_log`
---
-
-CREATE TABLE `dc_log` (
-  `lid` int(11) NOT NULL,
-  `gid` int(11) NOT NULL,
-  `uid` int(11) NOT NULL,
-  `mobile` varchar(20) NOT NULL,
-  `dealtime` varchar(20) NOT NULL,
-  `dealno` varchar(30) NOT NULL,
-  `coinnum` int(11) NOT NULL,
-  `description` text,
-  `result` varchar(20) DEFAULT NULL,
-  `returncode` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `dc_log`
---
-
-INSERT INTO `dc_log` (`lid`, `gid`, `uid`, `mobile`, `dealtime`, `dealno`, `coinnum`, `description`, `result`, `returncode`) VALUES
-(1, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(2, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(3, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(4, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(5, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(6, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(7, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(8, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(9, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(10, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(11, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(12, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(13, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(14, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(15, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(16, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(17, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(18, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(19, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086'),
-(20, 9, 9, '18353115149', '8888', '9999', 1, 'give', 'success', '10086');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `dc_option`
---
-
-CREATE TABLE `dc_option` (
-  `name` varchar(32) NOT NULL,
-  `value` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `dc_option`
---
-
-INSERT INTO `dc_option` (`name`, `value`) VALUES
-('coin_limit', '6');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `dc_user`
---
-
-CREATE TABLE `dc_user` (
-  `uid` int(11) NOT NULL,
-  `pid` int(11) NOT NULL,
-  `mobile` varchar(20) NOT NULL,
-  `sum` int(11) NOT NULL DEFAULT '0',
-  `today` int(11) NOT NULL DEFAULT '0',
-  `state` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `dc_user`
---
-
-INSERT INTO `dc_user` (`uid`, `pid`, `mobile`, `sum`, `today`, `state`) VALUES
-(1, 9, '13776043903', 0, 0, 'black'),
-(2, 9, '18353115149', 0, 0, 'normal'),
-(3, 9, '18353115149', 0, 0, 'normal'),
-(4, 9, '18353115149', 0, 0, 'normal'),
-(5, 9, '18353115149', 0, 0, 'normal'),
-(6, 9, '18353115149', 0, 0, 'normal'),
-(7, 9, '18353115149', 0, 0, 'normal'),
-(8, 9, '18353115149', 0, 0, 'normal'),
-(9, 9, '18353115149', 0, 0, 'normal'),
-(10, 9, '18353115149', 0, 0, 'black'),
-(11, 9, '18353115149', 0, 0, 'normal'),
-(12, 9, '18353115149', 0, 0, 'normal'),
-(13, 9, '18353115149', 0, 0, 'normal');
+INSERT INTO `dc_game` (`gid`, `pid`, `pname`, `pimg`, `pfile`, `state`, `coinlimit`, `coinnow`) VALUES
+(9, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(14, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(15, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(16, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(17, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(18, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(19, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(20, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(21, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(22, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(23, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(24, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(25, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(26, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(27, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(28, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(29, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(30, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(31, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(32, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(33, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(34, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(35, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(36, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(37, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(38, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(39, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(40, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(41, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(42, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(43, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(44, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(45, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(46, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(47, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(48, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(49, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(50, 88, '暗黑英雄', 'http://www.1000you.com/upload/yxk/201409/20140729032412352.png', 'http://sjg1.xiaopi.com:801/small/anheiyingxiong_an.apk', 'new', 30, 0),
+(51, 22, 'aacc', 'bb', 'cc', 'new', 32, 0),
+(52, 2, 'a', 'b', 'c', 'new', 3, 0);
 
 --
 -- Indexes for dumped tables
@@ -154,25 +88,6 @@ ALTER TABLE `dc_game`
   ADD PRIMARY KEY (`gid`);
 
 --
--- Indexes for table `dc_log`
---
-ALTER TABLE `dc_log`
-  ADD PRIMARY KEY (`lid`,`gid`,`uid`);
-
---
--- Indexes for table `dc_option`
---
-ALTER TABLE `dc_option`
-  ADD PRIMARY KEY (`name`),
-  ADD KEY `name` (`name`);
-
---
--- Indexes for table `dc_user`
---
-ALTER TABLE `dc_user`
-  ADD PRIMARY KEY (`uid`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -180,14 +95,4 @@ ALTER TABLE `dc_user`
 -- AUTO_INCREMENT for table `dc_game`
 --
 ALTER TABLE `dc_game`
-  MODIFY `gid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT for table `dc_log`
---
-ALTER TABLE `dc_log`
-  MODIFY `lid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
---
--- AUTO_INCREMENT for table `dc_user`
---
-ALTER TABLE `dc_user`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `gid` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=53;
