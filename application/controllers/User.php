@@ -131,6 +131,10 @@ class User extends CI_Controller {
 
         $data['loglist'] = $this->Log_model->getlist_user($uid, $limit, $offset);
         $data['user'] = $this->User_model->get($uid);
+
+        $this->load->model('Option_model');
+        $data['coinlimit'] = $this->Option_model->get('coinlimit');
+
         $this->load->view('user/log', $data);
     }
     public function test() {

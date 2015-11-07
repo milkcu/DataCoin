@@ -26,7 +26,7 @@
     }
     .tab-log th {
         font-size: 16px;
-        width: 110px;
+        width: 150px;
         font-weight: boldor;
     }
     .tab-log td {
@@ -67,7 +67,7 @@
             <th>原系统编号</th>
             <th>手机号码</th>
             <th>赠送流量总和</th>
-            <th>今日赠送流量</th>
+            <!--th>今日赠送流量</th-->
             <th>用户操作</th>
         </tr>
         </thead>
@@ -80,7 +80,7 @@
                     <td><?= $user->pid ?></td>
                     <td><?= $user->mobile ?></td>
                     <td><?= $user->sum ?></td>
-                    <td><?= $user->today ?></td>
+                    <!--td><?= $user->today ?></td-->
                     <td><input type="checkbox" name="black"
                             <?php if($user->state == 'black') echo 'checked'; ?>>黑名单</td>
                     <td><input type="submit" value="修改"></td>

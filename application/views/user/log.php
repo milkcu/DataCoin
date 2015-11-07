@@ -53,7 +53,7 @@
 
 <div class="user-prompt">
     欢迎参与千游网下游戏赠流量活动，您已累计赠送 <strong><?= $user->sum ?></strong> 个流量币，
-    今日获得流量币 <strong><?= $user->today ?></strong> 个，
+    每日对多获得流量币 <strong><?= $coinlimit ?></strong> 个，
     流量赠送明细如下.
 </div>
 

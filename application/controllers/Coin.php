@@ -17,36 +17,12 @@ class Coin extends CI_Controller {
         }
         $this->load->helper('form');
         $gid = $this->uri->segment(3);
+        $uid = $this->session->userdata('dc_uid');
         $mobile = $this->session->userdata('dc_mobile');
         $coinnum = 1;
-        $response = $this->Coin_model->give($mobile, $coinnum);
-
-        $this->load->model('Log_model');
-        $log = array();
-        $log['gid'] = $gid;
-        $log['uid'] = $this->session->userdata('dc_uid');
-        $log['mobile'] = $response->mobile;
-        $log['dealtime'] = $response->dealtime;
-        $log['dealno'] = $response->dealno;
-        $log['coinnum'] = $response->coinnum;
-        $log['description'] = 'give';
-        $log['result'] = $response->return->status;
-        $log['returncode'] = $response->return->code;
-        $lid = $this->Log_model->add($log);
-
-        // game.coinnow - 1
-
-        //
+        $response = $this->Coin_model->give($mobile, $coinnum, $uid, $gid);
 
         redirect(site_url('user/log'));
-
-        $data['lid'] = $lid;
-        $data['response'] = $response;
-        if($response->return->code == 0) {
-            $this->load->view('coin/success', $data);
-        } else {
-            $this->load->view('coin/failure', $data);
-        }
     }
     public function test() {
         echo base_url('e/1000you');
