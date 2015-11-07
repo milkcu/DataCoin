@@ -220,7 +220,7 @@
             <!--li><a id="fanew" class="" href="<?= site_url('user/add') ?>">激活账号</a></li-->
             <li><a id="fanew" class="" href="<?= site_url('user/set') ?>">绑定手机号</a></li>
             <li><a id="falibao" href="<?= site_url('game/all') ?>">获取流量币</a></li>
-            <li><a id="falibao" href="<?= site_url('user/log') ?>">赠送记录</a></li>
+            <!--li><a id="falibao" href="<?= site_url('user/log') ?>">赠送记录</a></li-->
         </ul>
     </div>
 </div>

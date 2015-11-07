@@ -18,7 +18,9 @@ class Coin extends CI_Controller {
         $this->load->helper('form');
         $gid = $this->uri->segment(3);
         $uid = $this->session->userdata('dc_uid');
-        $mobile = $this->session->userdata('dc_mobile');
+        $this->load->model('User_model');
+        $user = $this->User_model->get($uid);
+        $mobile = $user->mobile;
         $coinnum = 1;
         $response = $this->Coin_model->give($mobile, $coinnum, $uid, $gid);
 
