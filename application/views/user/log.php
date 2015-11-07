@@ -53,7 +53,7 @@
 
 <div class="user-prompt">
     欢迎参与千游网下游戏赠流量活动，您已累计赠送 <strong><?= $user->sum ?></strong> 个流量币，
-    每日对多获得流量币 <strong><?= $coinlimit ?></strong> 个，
+    每日最多获得流量币 <strong><?= $coinlimit ?></strong> 个，
     流量赠送明细如下。
 </div>
 
@@ -77,7 +77,7 @@
                 <!--td><?= $log->coinnum ?></td-->
                 <td><?= $log->mobile ?></td>
                 <td><?= $log->dealtime ?></td>
-                <td><?php if($log->returncode == 0) echo '赠送成功'; else echo '赠送失败'; ?></td>
+                <td><?php if($log->returncode === 0) echo '赠送成功'; else echo '赠送失败'; ?></td>
             </tr>
         <?php endforeach; ?>
         </tbody>

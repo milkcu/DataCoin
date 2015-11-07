@@ -213,6 +213,11 @@ switch (ENVIRONMENT)
 		exit(3); // EXIT_CONFIG
 	}
 
+if( ! ini_get('date.timezone') )
+{
+	date_default_timezone_set('Asia/Shanghai');
+}
+
 /*
  * -------------------------------------------------------------------
  *  Now that we know the path, set the main path constants

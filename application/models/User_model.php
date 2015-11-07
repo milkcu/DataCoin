@@ -40,14 +40,15 @@ class User_model extends CI_Model {
     }
     public function getp() {
         if(isset($_COOKIE['SA8R_2132_auth']) && isset($_COOKIE['SA8R_2132_saltkey'])) {
-            $auth = $_COOKIE['SA8R_2132_auth'];
-            $saltkey = $_COOKIE['SA8R_2132_saltkey'];
+            $auth = urlencode($_COOKIE['SA8R_2132_auth']);
+            $saltkey = urlencode($_COOKIE['SA8R_2132_saltkey']);
             $url = 'http://www.1000you.com/bbs/zxf_userinfo_datacoin.php';
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_COOKIE, "SA8R_2132_auth=$auth; SA8R_2132_saltkey=$saltkey");
             $response = curl_exec($ch);
+            // {"uid":"14993","uname":"test1107"}
             curl_close($ch);
             $p = json_decode($response);
             return $p;
@@ -67,7 +68,12 @@ class User_model extends CI_Model {
     }
     public function auth() {
         if(isset($_SESSION['dc_uid']) && isset($_SESSION['dc_mobile'])) {
-            return true;
+            $user = $this->User_model->get($_SESSION['dc_uid']);
+            if(@$user->pid == $this->getp()->uid) {
+                return true;
+            } else {
+                return false;
+            }
         } elseif($this->getp()) {
             if($this->isreg($this->getp()->uid)) {
                 // no login

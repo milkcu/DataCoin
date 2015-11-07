@@ -86,7 +86,7 @@
                 <td><?= $log->coinnum ?></td>
                 <td><?= $log->dealtime ?></td>
                 <td><?= $log->dealno ?></td>
-                <td><?php if($log->returncode == 0) echo '赠送成功'; else echo '赠送失败'; ?></td>
+                <td><?php if($log->returncode === 0) echo '赠送成功'; else echo '赠送失败'; ?></td>
                 <td><?= $log->returncode ?></td>
             </tr>
         <?php endforeach; ?>

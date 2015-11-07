@@ -65,6 +65,7 @@
         <tr>
             <th>用户编号</th>
             <th>原系统编号</th>
+            <th>用户名</th>
             <th>手机号码</th>
             <th>赠送流量总和</th>
             <!--th>今日赠送流量</th-->
@@ -78,6 +79,7 @@
                     <input type="hidden" name="uid" value="<?= $user->uid ?>">
                     <td><?= $user->uid ?></td>
                     <td><?= $user->pid ?></td>
+                    <td><?= $user->puname ?></td>
                     <td><?= $user->mobile ?></td>
                     <td><?= $user->sum ?></td>
                     <!--td><?= $user->today ?></td-->

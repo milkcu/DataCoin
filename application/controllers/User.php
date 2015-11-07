@@ -120,6 +120,9 @@ class User extends CI_Controller {
         }
         $this->load->model('Log_model');
         $uid = $this->session->userdata('dc_uid');
+        echo $uid;
+        print_r($_SESSION);
+        exit();
         $limit = 10;
         $this->load->library('pagination');
         $offset = $this->uri->segment(3);
