@@ -1,4 +1,4 @@
-<?php $this->load->view('layout/fhheader'); ?>
+<?php $this->load->view('layout/mheader'); ?>
 <style>
     .user-prompt {
         font-size: 15px;
@@ -12,6 +12,9 @@
         padding: 15px 20px;
         margin-top: 15px;
         margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 86%;
     }
     .user-log {
         width: 100%;
@@ -61,7 +64,7 @@
     <table class="tab-log">
         <thead>
         <tr>
-            <th>赠送编号</th>
+            <!--th>赠送编号</th-->
             <th>游戏名称</th>
             <!--th>流量币数</th-->
             <th>赠送手机号</th>
@@ -72,7 +75,7 @@
         <tbody>
         <?php foreach($loglist as $log) : ?>
             <tr>
-                <td><?= $log->lid ?></td>
+                <!--td><?= $log->lid ?></td-->
                 <td><?= $log->game->pname ?></td>
                 <!--td><?= $log->coinnum ?></td-->
                 <td><?= $log->mobile ?></td>
@@ -92,4 +95,4 @@
     <?php //print_r($loglist); ?>
 </pre>
 
-<?php $this->load->view('layout/fhfooter'); ?>
+<?php $this->load->view('layout/mfooter'); ?>

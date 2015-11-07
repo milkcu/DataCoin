@@ -1,5 +1,24 @@
 <?php $this->load->view('layout/mheader'); ?>
 
+<div class="yxk_box">
+    <ul id="mianlist">
+        <?php foreach($gamelist as $game) : ?>
+            <li>
+                <a class="pic" onclick="alert('欢迎参与下游戏赠流量活动，流量币赠送结果可在个人中心查询！');location.href='<?= site_url('coin/mgive/'.$game->gid) ?>';" href="<?= $game->pfile ?>" target="_blank" title="<?= $game->pname ?>">
+                    <img src="<?= $game->pimg ?>" alt="<?= $game->pname ?>">
+                </a>
+                <a class="xz" onclick="alert('欢迎参与下游戏赠流量活动，流量币赠送结果可在个人中心查询！');location.href='<?= site_url('coin/mgive/'.$game->gid) ?>';" href="<?= $game->pfile ?>" target="_blank">下 载</a>
+                <a onclick="alert('欢迎参与下游戏赠流量活动，流量币赠送结果可在个人中心查询！');location.href='<?= site_url('coin/mgive/'.$game->gid) ?>';" href="<?= $game->pfile ?>" target="_blank" title="<?= $game->pname ?>" class="qy100">
+                    <h4 class="title"><p><?= $game->pname ?></p></h4>
+                    <p class="info">还剩<?= $game->coinnow ?>个<span></span>总共<?= $game->coinlimit ?>个</p>
+                    <p class=""><span class="">下载赠送流量币</span></p>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+
+
 <!--div class="yxk_lb">
     <?php foreach($gamelist as $game) : ?>
         <div class="yxk_nr">
@@ -18,9 +37,9 @@
     <?php endforeach; ?>
 </div-->
 
-<pre>
+<!--pre>
     <?php print_r($gamelist); ?>
-</pre>
+</pre-->
 
 <div class="gy_page">
     <?php echo $this->pagination->create_links() ?>

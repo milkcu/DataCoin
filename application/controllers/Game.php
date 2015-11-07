@@ -97,11 +97,11 @@ class Game extends CI_Controller {
         $this->load->view('game/list', $data);
     }
     public function mall() {
-        $limit = 20;
+        $limit = 10;
         $this->load->library('pagination');
         $offset = $this->uri->segment(3);
         $config['uri_segment'] = 3;
-        $config['base_url'] = site_url('game/all');
+        $config['base_url'] = site_url('game/mall');
         $config['total_rows'] = $this->Game_model->getnum();
         $config['per_page'] = $limit;
         $this->pagination->initialize($config);

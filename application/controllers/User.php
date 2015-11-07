@@ -153,4 +153,64 @@ class User extends CI_Controller {
         print_r($response);
         print_r(json_decode($response));
     }
+
+    // mobile controller
+    public function madd() {
+        $this->load->helper('form');
+        if($this->input->post()) {
+            $user = array();
+            $user['pid'] = $this->User_model->getp()->uid;
+            $user['puname'] = $this->User_model->getp()->uname;
+            $user['mobile'] = $this->input->post('mobile');
+            $user['sum'] = 0;
+            $user['today'] = 0;
+            $user['state'] = 'normal';
+            $uid = $this->User_model->add($user);
+            $this->session->set_userdata('dc_uid', $uid);
+            redirect('user/mlog');
+        } else {
+            if(! $this->User_model->getp()) {
+                redirect('http://m.1000you.com/');
+            }
+            $this->load->view('user/madd');
+        }
+    }
+    public function mset() {
+        if(! $this->User_model->auth()) {
+            redirect(site_url('user/madd'));
+        }
+        $this->load->helper('form');
+        $uid = $this->session->userdata('dc_uid');
+        if($this->input->post()) {
+            $data['mobile'] = $this->input->post('mobile');
+            $this->User_model->set($uid, $data);
+            redirect('user/mset');
+        } else {
+            $data['user'] = $this->User_model->get($uid);
+            $this->load->view('user/mset', $data);
+        }
+    }
+    public function mlog() {
+        if(! $this->User_model->auth()) {
+            redirect(site_url('user/madd'));
+        }
+        $this->load->model('Log_model');
+        $uid = $this->session->userdata('dc_uid');
+        $limit = 10;
+        $this->load->library('pagination');
+        $offset = $this->uri->segment(3);
+        $config['uri_segment'] = 3;
+        $config['base_url'] = site_url('user/mlog');
+        $config['total_rows'] = $this->Log_model->getnum_user($uid);
+        $config['per_page'] = $limit;
+        $this->pagination->initialize($config);
+
+        $data['loglist'] = $this->Log_model->getlist_user($uid, $limit, $offset);
+        $data['user'] = $this->User_model->get($uid);
+
+        $this->load->model('Option_model');
+        $data['coinlimit'] = $this->Option_model->get('coinlimit');
+
+        $this->load->view('user/mlog', $data);
+    }
 }
