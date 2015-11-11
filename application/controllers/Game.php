@@ -78,11 +78,6 @@ class Game extends CI_Controller {
             $this->load->view('game/set', $data);
         }
     }
-    public function show() {
-        $gid = $this->uri->segment(3);
-        $data['game'] = $this->Game_model->get($gid);
-        $this->load->view('game/show', $data);
-    }
     public function all() {
         $limit = 20;
         $this->load->library('pagination');

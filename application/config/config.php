@@ -17,7 +17,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
-$config['base_url'] = 'http://dc/';
+$config['base_url'] = 'http://www.1000you.com/';
 
 /*
 |--------------------------------------------------------------------------

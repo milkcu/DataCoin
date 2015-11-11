@@ -28,10 +28,4 @@ class Option extends CI_Controller {
             $this->load->view('option/coin', $data);
         }
     }
-    public function auth() {
-        if(isset($_COOKIE['yfmmhecmsdodbdata'])) {
-            return true;
-        }
-        return false;
-    }
 }

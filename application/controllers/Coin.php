@@ -26,14 +26,6 @@ class Coin extends CI_Controller {
 
         redirect(site_url('user/log'));
     }
-    public function test() {
-        echo base_url('e/1000you');
-        //$a = array();
-        //exec("ls ~", $a, $b);
-        //exec("java -cp /Users/xintong/Projects/EclipseWorkspace/CoinKit/CoinKit.jar api.Main 3 4 5 6", $a, $b);
-        //print_r($a);
-        //print_r(date("YmdHis", time()) . rand(10000000, 99999999));
-    }
     public function code() {
         $this->load->view('coin/code');
     }

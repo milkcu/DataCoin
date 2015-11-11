@@ -29,22 +29,4 @@ class Log extends CI_Controller {
         $data['loglist'] = $this->Log_model->getlist($limit, $offset);
         $this->load->view('log/list', $data);
     }
-    public function test() {
-        print_r($_COOKIE);
-    }
-    public function user() {
-        //$uid = $this->session->userdata('dc_uid');
-        $uid = 9;
-        $limit = 10;
-        $this->load->library('pagination');
-        $offset = $this->uri->segment(3);
-        $config['uri_segment'] = 3;
-        $config['base_url'] = site_url('log/user');
-        $config['total_rows'] = $this->Log_model->getnum();
-        $config['per_page'] = $limit;
-        $this->pagination->initialize($config);
-
-        $data['loglist'] = $this->Log_model->getlist_user($uid, $limit, $offset);
-        $this->load->view('log/user', $data);
-    }
 }
